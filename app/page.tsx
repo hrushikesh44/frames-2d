@@ -1,12 +1,14 @@
 import Loading from "@/icons/loading";
+import { LoadingThree, LoadingTwo } from "@/icons/loading-two";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
    <div className=" flex flex-col items-center justify-center">
-    <main className="flex items-center justify-center h-[50vh] ">
-      <Loading />
+    <main className="flex items-center justify-center h-[50vh] gap-5 ">
+      <LoadingTwo />
+      <LoadingThree />
     </main>
     <footer>
 
