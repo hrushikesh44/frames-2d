@@ -1,5 +1,5 @@
-import Loading from "@/icons/loading";
-import { LoadingThree, LoadingTwo } from "@/icons/loading-two";
+import Loading from "@/components/icons/loading";
+import { LoadingThree, LoadingTwo } from "@/components/icons/loading-two";
 import Image from "next/image";
 import Link from "next/link";
 

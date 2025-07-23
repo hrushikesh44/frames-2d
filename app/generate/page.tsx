@@ -1,12 +1,9 @@
 'use client'
 
 import Code from "@/components/code-block";
-import Message from "@/components/message";
-import Prompt from "@/components/message";
-import Loading from "@/icons/loading";
-import { IconArrowAutofitUp, IconArrowUp } from "@tabler/icons-react";
+import { IconArrowUp } from "@tabler/icons-react";
 import Link from "next/link";
-import { useState } from "react"
+import { useCallback, useState } from "react"
 
 function cleanCode(raw: string): string {
   return raw
@@ -19,6 +16,9 @@ export default function Home(){
     const [input, setInput] = useState<string>('')
     const [response, setResponse] = useState<string>('')
     const [loading, setLoading] = useState(false)
+    const [videoUrl, setVideoUrl] = useState('')
+    const [videoLoading, setVideoLoading] = useState(false)
+    const [rendered, setRendered] = useState(false)
 
     async function handleSubmit(){
         setInput('');
@@ -43,9 +43,41 @@ export default function Home(){
         }
     }
 
+    const runCode = async(code: string) => {
+        console.log('clicked now')
+        if(videoLoading || rendered) return
+        setVideoLoading(true)
+        setVideoUrl('');
+
+        const res = await fetch('/api/render', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                code: code
+            })
+        })
+
+        const data = await res.json();
+        
+        if(data.videoUrl){
+            setVideoUrl(data.videoUrl)
+        } else {
+            alert('Error while rendering video')
+        }
+        
+        setVideoLoading(false)
+        setRendered(true)
+    }
+    // , [videoLoading, rendered])
+
     return (
         <div className="flex flex-col items-center h-full">
-             <Code response={response} loading={loading}/>
+            {response && <Code response={response} loading={loading} onClick={() =>runCode(response)}/>}
+            {videoUrl && <div className="mt-6">
+                        <video controls width={600} src={videoUrl} />
+                     </div> }
             <div className="fixed bottom-0 bg-[#0a0a0a] pb-10 flex">
                 <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Enter your message" className="h-full rounded-xl border border-white/10 w-[52vw] p-3 focus:outline-none "/>
                 <Link href={''} className="p-2.5 rounded-full cursor-pointer hover:bg-neutral-300 hover:text-black hover:shadow-lg shadow-cyan-500  border border-white/10 ml-5" onClick={handleSubmit}><IconArrowUp className=""/></Link>
