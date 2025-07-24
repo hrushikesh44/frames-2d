@@ -60,11 +60,16 @@ export default function Home(){
         })
 
         const data = await res.json();
+        console.log(data)
         
         if(data.videoUrl){
             setVideoUrl(data.videoUrl)
-        } else {
-            alert('Error while rendering video')
+        } else if(data.error == "Failed to render video") {
+            console.log('error while rendering')
+            return
+        } else if (data.error == "Video not found" ){
+            console.log('Video path not found')
+            return
         }
         
         setVideoLoading(false)

@@ -1,7 +1,8 @@
 from manim import *
 
-class PentagonScene(Scene):
+class SceneClass(Scene):
     def construct(self):
-        pentagon = RegularPolygon(n=5)
-        self.play(Create(pentagon))
+        circle = Circle(radius=2, color=WHITE, fill_opacity=1)
+        circle.set_fill(color=[YELLOW, BLUE], opacity=1)
+        self.play(Create(circle))
         self.wait(1)
