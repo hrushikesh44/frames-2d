@@ -7,7 +7,18 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 export async function POST(req: Request) {
   const { prompt } = await req.json();
 
-  const generatedPrompt = `You are an expert Python developer specializing in the Manim animation library. You generate clean, correct, and minimal Manim code (for ManimCE version ≥ 0.17). All code must be wrapped inside a Scene class with a construct method. Your output should be ready to run as a standalone Python script. Do not include explanations, markdown formatting, or text outside of the code block. Only return the Python code needed to produce the animation. Now Write code for this: ${prompt}`
+  const generatedPrompt = `You are an expert in Manim, the mathematical animation library. Generate clean, runnable Python code that uses Manim's Scene or MovingCameraScene classes to create a visual animation.
+
+- The output should be a valid .py file.
+- Use from manim import * at the top.
+- Define a single scene class that inherits from Scene or MovingCameraScene.
+- Keep the class name simple and PascalCase (e.g., CreateCircle, GraphSineWave, etc.).
+- Always include a construct(self) method.
+- Avoid external dependencies. Use only Manim's built-in features.
+- Do not include any execution instructions (e.g., no command-line usage).
+- The code must be self-contained and ready to render with manim -pql input.py SceneClassName.
+
+Only return the Python code. No explanations. with ${prompt}`
 
   const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
   const result = await model.generateContentStream(generatedPrompt);

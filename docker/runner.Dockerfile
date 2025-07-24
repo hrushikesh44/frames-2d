@@ -1,9 +1,8 @@
-FROM python:3.10-slim
+FROM python:3.10
 
 RUN apt-get update && apt-get install -y \
-    build-essential \
     gcc \
-    g++ \
+    g++\
     ffmpeg \
     libcairo2 \
     pango1.0-tools \
@@ -16,14 +15,33 @@ RUN apt-get update && apt-get install -y \
     libavfilter-dev \
     libopenblas-dev \
     liblapack-dev \
-    libpangocairo-1.0-0 \
- && rm -rf /var/lib/apt/lists/*
+    libopengl0 \
+    libgl1-mesa-glx \
+    libgl1-mesa-dri \
+    libglu1-mesa \
+    libglew-dev \
+    libxrender1 \
+    libxext6 \
+    libsm6 \
+    libx11-6 \
+    texlive-full \
+    texlive-fonts-recommended \
+    texlive-latex-extra \
+    texlive-latex-base \
+    texlive-fonts-extra \
+    dvipng \
+    cm-super \
+    git \
+    curl \
+    build-essential \
+    python3-pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
-RUN pip install manim
+RUN pip install manim boto3
 
 WORKDIR /code
 COPY runner.py /code/runner.py
 
 ENTRYPOINT ["python", "runner.py"]
-

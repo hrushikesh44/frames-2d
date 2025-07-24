@@ -1,6 +1,7 @@
 'use client'
 
 import Code from "@/components/code-block";
+import Loading from "@/components/icons/loading";
 import { IconArrowUp } from "@tabler/icons-react";
 import Link from "next/link";
 import { useCallback, useState } from "react"
@@ -62,8 +63,8 @@ export default function Home(){
         const data = await res.json();
         console.log(data)
         
-        if(data.videoUrl){
-            setVideoUrl(data.videoUrl)
+        if(data.video){
+            setVideoUrl(data.video)
         } else if(data.error == "Failed to render video") {
             console.log('error while rendering')
             return
@@ -78,14 +79,17 @@ export default function Home(){
     // , [videoLoading, rendered])
 
     return (
-        <div className="flex flex-col items-center h-full">
-            {response && <Code response={response} loading={loading} onClick={() =>runCode(response)}/>}
-            {videoUrl && <div className="mt-6">
-                        <video controls width={600} src={videoUrl} />
-                     </div> }
-            <div className="fixed bottom-0 bg-[#0a0a0a] pb-10 flex">
-                <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Enter your message" className="h-full rounded-xl border border-white/10 w-[52vw] p-3 focus:outline-none "/>
-                <Link href={''} className="p-2.5 rounded-full cursor-pointer hover:bg-neutral-300 hover:text-black hover:shadow-lg shadow-cyan-500  border border-white/10 ml-5" onClick={handleSubmit}><IconArrowUp className=""/></Link>
+        <div className="flex flex-col items-center h-fit">
+            <div className="flex flex-col overflow-hidden">
+                {response && <Code response={response} loading={loading} onClick={() =>runCode(response)}/>}
+                {loading && <Loading />}
+                {videoUrl && <div className="">
+                        <video controls width={600} height={500} src={videoUrl} className="ml-20 mb-20" />
+                </div> }
+            </div>
+            <div className="fixed bottom-0 bg-[#fefefe] dark:bg-[#0a0a0a] z-50 pb-10 flex w-screen items-center justify-center">
+                <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Enter your message" className="h-full rounded-xl border border-black/10 dark:border-white/10 w-[50vw] p-3 focus:outline-none "/>
+                 <Link href={''}  className="p-2.5 rounded-full cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-300 hover:text-black hover:shadow-lg shadow-cyan-500  border border-black/10 dark:border-white/10 ml-5" onClick={handleSubmit}><IconArrowUp className=""/></Link>
             </div>
         </div>
     )
