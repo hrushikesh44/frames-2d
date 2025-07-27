@@ -13,7 +13,7 @@ export default function Loading(){
             strokeWidth="2"  
             strokeLinecap="round"  
             strokeLinejoin="round"  
-            className="h-10 w-10 ">
+            className="h-10 w-10">
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
@@ -23,42 +23,42 @@ export default function Loading(){
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M12 6l0 -3" color="cyan"/>
+                d="M12 6l0 -3" color="white"/>
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M16.25 7.75l2.15 -2.15" color="cyan"/>
+                d="M16.25 7.75l2.15 -2.15" color="white"/>
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M18 12l3 0" color="cyan" />
+                d="M18 12l3 0" color="white" />
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M16.25 16.25l2.15 2.15" color="cyan" />
+                d="M16.25 16.25l2.15 2.15" color="white" />
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M12 18l0 3" color="cyan" />
+                d="M12 18l0 3" color="white" />
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M7.75 16.25l-2.15 2.15" color="cyan"/>
+                d="M7.75 16.25l-2.15 2.15" color="white"/>
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M6 12l-3 0" color="cyan"/>
+                d="M6 12l-3 0" color="white"/>
                 <motion.path 
                 initial={{pathLength: 0}} 
                 animate={{pathLength: 1}} 
                 transition={{duration: 0.9, ease: easeInOut , repeat: Infinity, repeatType: 'reverse'}} 
-                d="M7.75 7.75l-2.15 -2.15" color="cyan" />
+                d="M7.75 7.75l-2.15 -2.15" color="white" />
         </motion.svg>
     )
 }

@@ -1,30 +1,30 @@
 from manim import *
 
-class GraphSineWave(Scene):
+class CircleAndArrows(Scene):
     def construct(self):
-        axes = Axes(
-            x_range=[-PI, PI, PI / 2],
-            y_range=[-1.5, 1.5, 0.5],
-            x_length=6,
-            y_length=3,
-            axis_config={"color": BLUE},
-        )
-        axes.add_coordinate_labels()
+        circle_frontend = Circle(radius=1, color=BLUE).shift(LEFT * 3)
+        text_frontend = Text("Frontend").scale(0.7).move_to(circle_frontend.get_center())
 
-        graph = axes.plot(
-            lambda x: np.sin(x),
-            x_range=[-PI, PI],
-            color=GREEN,
-            stroke_width=3
-        )
+        circle_backend = Circle(radius=1, color=GREEN)
+        text_backend = Text("Backend").scale(0.7).move_to(circle_backend.get_center())
 
-        label = axes.get_graph_label(
-            graph,
-            "\\sin(x)",
-            x_val=PI,
-            direction=UR
-        )
+        circle_database = Circle(radius=1, color=RED).shift(RIGHT * 3)
+        text_database = Text("Database").scale(0.7).move_to(circle_database.get_center())
 
-        self.play(Create(axes), Write(label))
-        self.play(Create(graph, run_time=3))
+        self.play(Create(circle_frontend), Write(text_frontend))
+        self.play(Create(circle_backend), Write(text_backend))
+        self.play(Create(circle_database), Write(text_database))
+
+        arrow1 = Arrow(circle_frontend.get_right(), circle_backend.get_left(), buff=0.1)
+        arrow2 = Arrow(circle_backend.get_right(), circle_database.get_left(), buff=0.1)
+        arrow3 = Arrow(circle_database.get_left(), circle_backend.get_right(), buff=0.1)
+        arrow4 = Arrow(circle_backend.get_left(), circle_frontend.get_right(), buff=0.1)
+
+        self.play(GrowArrow(arrow1))
+        self.wait(0.5)
+        self.play(GrowArrow(arrow2))
+        self.wait(0.5)
+        self.play(GrowArrow(arrow3))
+        self.wait(0.5)
+        self.play(GrowArrow(arrow4))
         self.wait(1)
