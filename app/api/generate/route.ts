@@ -12,6 +12,7 @@ export async function POST(req: Request) {
 - The output should be a valid .py file.
 - Use from manim import * at the top.
 - Define a single scene class that inherits from Scene or MovingCameraScene.
+- Do not add animations unless specified.
 - Keep the class name simple and PascalCase (e.g., CreateCircle, GraphSineWave, etc.).
 - Always include a construct(self) method.
 - Avoid external dependencies. Use only Manim's built-in features.

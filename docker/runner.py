@@ -3,7 +3,6 @@ import sys
 import os
 import boto3
 import ast
-import shutil
 from datetime import datetime
 from botocore.exceptions import BotoCoreError, NoCredentialsError
 
@@ -11,7 +10,6 @@ input_file = "input.py"
 bucket_name = os.getenv("S3_BUCKET")
 region = os.getenv("AWS_DEFAULT_REGION", "ap-south-1")
 output_dir = "/code/media"  
-final_output_path = "/code/output.mp4"
 
 os.environ["MANIM_MEDIA_DIR"] = output_dir  
 os.environ["MANIM_USE_OPENCV"] = "false"
@@ -63,14 +61,13 @@ if not mp4_files:
     sys.exit(1)
 
 latest_video = sorted(mp4_files, key=lambda x: x[1], reverse=True)[0][0]
-shutil.copy(latest_video, final_output_path)
-print(f"Copied rendered video to {final_output_path}")
+print(f"Found rendered video at {latest_video}")
 
 try:
     s3 = boto3.client("s3", region_name=region)
     now = datetime.utcnow().strftime("%Y%m%d%H%M%S")
     s3_key = f"videos/{now}.mp4"
-    s3.upload_file(final_output_path, bucket_name, s3_key)
+    s3.upload_file(latest_video, bucket_name, s3_key)
 
     video_url = f"https://{bucket_name}.s3.{region}.amazonaws.com/{s3_key}"
     print(f"VIDEO_URL::{video_url}")

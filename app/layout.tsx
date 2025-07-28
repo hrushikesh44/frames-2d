@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+import { Providers } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "AI 2D Video Generator",
@@ -15,12 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={GeistSans.className}
-      >
-        {children}
-      </body>
-    </html>
+      <html lang="en" suppressHydrationWarning >
+        <body
+          className={GeistSans.className}
+        >
+        <Providers >
+          {children}
+        </Providers>
+        </body>
+      </html>
   );
 }
