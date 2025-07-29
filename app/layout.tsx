@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import { Providers } from "@/components/theme-provider";
+import { Providers } from "./providers";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "AI 2D Video Generator",
@@ -21,6 +22,7 @@ export default function RootLayout({
           className={GeistSans.className}
         >
         <Providers >
+          <Toaster position="bottom-right"/>
           {children}
         </Providers>
         </body>

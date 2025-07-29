@@ -1,11 +1,11 @@
-// components/ThemeToggle.tsx
+
 "use client";
 
 import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -17,9 +17,9 @@ export default function ThemeToggle() {
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
 
-      className="p-2 bg-gray-200 dark:bg-gray-800 rounded"
+      className="p-2 hover:bg-neutral-400/30 rounded-full"
     >
-       Toggle
+       {resolvedTheme === "dark" ? <IconSun/> : <IconMoon/>}
     </button>
   );
 }

@@ -1,16 +1,15 @@
 import Hero from "@/components/hero";
-import ThemeToggle from "@/components/toggle-theme";
-import { IconSun } from "@tabler/icons-react";
+import { ThemeToggle} from "@/components/toggle-theme";
 
-export default function Home(){
+export default async function Home(){
     return(
         <div>
-            {/* <div className="flex items-end justify-end">
-            <ThemeToggle />
-            </div> */}
+            <div className="flex items-end justify-end">
+                <ThemeToggle />
+            </div>
             <div className="flex items-center justify-center">
                 <Hero />
             </div>
-        </div>
+    </div>
     )
 }

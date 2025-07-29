@@ -51,8 +51,8 @@ export default function Hero(){
 
     const runCode = useCallback(async(code: string) => {
         console.log('clicked now')
-        if(videoLoading) return toast('Video is being rendered')
-        if(rendered) return toast('Video is rendered and wont render same code again.')
+        if(videoLoading) return toast.error('Please wait')
+        if(rendered) return toast.error('Video is rendered and wont render same video again.' )
         setVideoLoading(true)
         setVideoUrl('');
 
@@ -82,44 +82,40 @@ export default function Hero(){
             return
         }
         
+        toast.success("Video has successfully rendered.")
         setVideoLoading(false)
         setRendered(true)
     }, [videoLoading, rendered])
 
     return (
         <div className="flex flex-col justify-center items-center min-h-[calc(100vh-40px)]">
-        <Toaster position="bottom-right" gutter={10} />
         <div className="flex flex-col overflow-hidden">
                 <div className="flex flex-col items-center">
-                <div className="md:w-[40vw] lg:w-[40vw] flex flex-col pb-10 items-end gap-4">
-                    {chat && <p className="text-xl text-end text-neutral-600 dark:text-neutral-200 mt-10 p-2 bg-neutral-300 dark:bg-neutral-800 border-black/10 dark:border-white/10 rounded-xl">{chat}</p>}
+                <div className="sm:w-[60vw] lg:w-[40vw] flex flex-col pb-10 items-end gap-4">
+                    {chat && <p className="text-xl text-end mt-10 p-2 border border-neutral-400 dark:border-neutral-600 rounded-xl">{chat}</p>}
                     {loading && <Loading />}
                 </div>
                 </div>
-            {response && <Code response={response}/>}
-            
-            <div className="flex flex-col items-center justify-baseline">
-                <div className="flex items-center justify-around">
-                    {response && <Button text="Get Video" onClick={() => runCode(response)} />}
-                    {videoLoading && <Loading/>}
-                </div>
+            {response && <Code response={response} onClick={() => runCode(response)} loading={videoLoading}/>}
+            <div className="flex flex-col items-center justify-around">
                 {videoUrl && <video controls width={500} height={500} src={videoUrl} className="mt-10 mb-30" />}
             </div>
         </div>
-        <div className={`flex flex-col gap-3 ${!response || !loading && " mb-20"}`}>
+        <div className={`w-fit transition-all duration-300 ${ response || loading ? " mb-4" : " "}`}>
             {!response && !loading && <div>
-            <p className="text-3xl font-bold text-black dark:text-[#fefefe] text-center">AI 2D VIDEO GENERATOR</p>
+            <p className="text-3xl font-bold text-center mb-5">Frames 2D</p>
             </div> }
-            <div className={`flex flex-col items-end bg-[#e4e4e4] dark:bg-neutral-800 border border-black/10 dark:border-white/10 h-fit p-2 rounded-2xl ${ response || loading ? " bottom-0" : " "}`}>
+            <div className={`flex flex-col items-end shadow-lg border dark:border-neutral-400 h-fit p-2 rounded-2xl focus-within:border-2`}>
             <textarea
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="w-[40vw] resize-none overflow-hidden outline-none p-2 focus:outline-none transition-transform duration-200 placeholder:text-neutral-700 dark:placeholder:text-neutral-400  "
+                className="w-[80vw] 
+                sm:w-[60vw] lg:w-[40vw] resize-none overflow-hidden outline-none p-2 focus:outline-none transition-transform duration-200 placeholder:text-neutral-700 dark:placeholder:text-neutral-400  "
                 rows={1}
                 placeholder="Your idea into a video..."
             />
-            <div className='p-1 bg-neutral-900 dark:bg-white hover:bg-neutral-700 dark:hover:bg-white/80 text-white dark:text-black h-fit w-fit rounded-full cursor-pointer justify-center'>
+            <div className='p-1 border border-neutral-400 dark:border-neutral-600 h-fit w-fit rounded-full cursor-pointer justify-center'>
                 {value ? <IconArrowUp onClick={handleSubmit}/> : <IconAccessPointOff className="cursor-not-allowed"/>}
             </div>
             </div>
