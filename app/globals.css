@@ -5,13 +5,13 @@
   :root {
     --background: #D3D3D3;
     --foreground: #161A1D;
-     --border: var(--color-neutral-500)
+    --border: 220 13% 91%
   }
 
   .dark {
-    --background: #161A1D;
+    --background: #000000;
     --foreground: #FFFFFF;
-    --border: var(--color-neutral-500)
+     --border: 215 27.9% 16.9%;
   }
 }
 

@@ -1,14 +1,20 @@
 from manim import *
 
-class ShapeMorph(Scene):
+class CosineWave(Scene):
     def construct(self):
-        circle = Circle(radius=1, color=BLUE)
-        square = Square(side_length=2, color=GREEN).move_to(circle)
-        rectangle = Rectangle(width=3, height=1.5, color=RED).move_to(circle)
+        ax = Axes(
+            x_range=[-PI, PI, PI/2],
+            y_range=[-1.5, 1.5, 0.5],
+            axis_config={"color": BLUE},
+        )
+        labels = ax.get_axis_labels(x_label="x", y_label="y")
 
-        self.play(Create(circle))
-        self.wait(0.5)
-        self.play(Transform(circle, square), run_time=2)
-        self.wait(0.5)
-        self.play(Transform(square, rectangle), run_time=2)
-        self.wait(1)
+        cos_graph = ax.plot(
+            lambda x: np.cos(x),
+            x_range=[-PI, PI],
+            color=GREEN,
+        )
+
+        self.play(Create(ax), Create(labels))
+        self.play(Create(cos_graph))
+        self.wait(2)

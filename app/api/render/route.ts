@@ -2,9 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
+import { db } from '@/lib/db';
+import { videos } from '@/lib/db/schema';
+import { auth } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
+  const session = await auth.api.getSession({
+    headers: req.headers
+  })
 
+  if(!session?.user.id){
+    return NextResponse.json(
+        { error: 'Unauthorized - Please log in' },
+        { status: 401 }
+      );
+  }
   const body = await req.json();
   const code: string = body.code;
 
@@ -45,7 +57,16 @@ export async function POST(req: NextRequest) {
 
   try {
     const videoUrl = await runDocker();
-    return NextResponse.json({ video: videoUrl });
+     const [newVideo] = await db.insert(videos).values({
+      id: crypto.randomUUID(),
+      url: videoUrl,
+      userId: session.user.id,
+    }).returning();
+
+    return NextResponse.json({
+      success: true,
+      video: newVideo
+    });
   } catch (err) {
     console.error('Error running container:', err);
     return NextResponse.json({ error: 'Failed to render and upload video' }, { status: 500 });

@@ -3,6 +3,8 @@ import { authClient } from "@/lib/auth-client";
 import { ThemeToggle } from "./toggle-theme";
 import { redirect, usePathname } from "next/navigation";
 import toast from "react-hot-toast";
+import Link from "next/link";
+import { IconLogout } from "@tabler/icons-react";
 
 const signOut = async() => {
     await authClient.signOut()
@@ -15,14 +17,11 @@ export default function Navbar(){
     const shouldHideNavbar = ['/login'].includes(pathname)
 
    return(
-     <div className="flex items-end justify-between p-2 ">
-        <div>
-            <span className="text-2xl font-bold">Frames 2D</span>
+     <div className="flex items-center justify-end ">
+        <div className="flex items-center gap-3 pt-10 fixed">
+            <ThemeToggle />
+            {/* {!shouldHideNavbar && <button onClick={signOut} className="flex items-center gap-1 cursor-pointer p-2 rounded-xl group">Logout <IconLogout className="group-hover:translate-x-0.5 transition-transform duration-300"/></button>} */}
         </div>
-       <div className="flex items-center gap-3">
-         {!shouldHideNavbar && <button onClick={signOut} className="p-2 border dark:border-neutral-400 rounded-xl">Logout</button>}
-        <ThemeToggle />
-       </div>
-    </div>
+     </div>
    )
 }
