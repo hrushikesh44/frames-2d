@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: "AI 2D Video Generator",
@@ -22,6 +23,7 @@ export default function RootLayout({
           className={GeistSans.className}
         >
         <Providers >
+          <Navbar />
           <Toaster position="bottom-right"/>
           {children}
         </Providers>
