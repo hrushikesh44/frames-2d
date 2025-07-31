@@ -1,6 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+  
+## AI 2D Video Generator   
+You can generate 2d educational videos using this tool. It gives videos which are produced using manim(by 3blue1brown) library built on nextjs and using Gemini.  
 
-## Getting Started
+#Videos like this
+<video width="320" height="240" controls>
+  <source src="/public/example.mp4" type="video/mp4">
+</video>     
+
 
 First, run the development server:
 
