@@ -72,6 +72,13 @@ export const videos = pgTable("videos", {
   userId: text("user_id").references(() => user.id).notNull()
 })
 
+export const chats = pgTable("chat", {
+  id: text("id").primaryKey(),
+  prompt: text("prompt").notNull(),
+  chat: text("chat").notNull(),
+  userId: text("user_id").references(() => user.id).notNull()
+})
+
 export const userRelations = relations(user, ({many}) => ({
   videos: many(videos)
 }))
@@ -81,6 +88,13 @@ export const videoRelations = relations(videos, ({one}) => ({
       fields: [videos.userId],
       references: [user.id]
     })
+}))
+
+export const chatRelations = relations(chats, ({one}) => ({
+  user: one(user, {
+    fields: [chats.userId],
+    references: [user.id]
+  })
 }))
 
 export const schema = { user , account, verification, session, videos}

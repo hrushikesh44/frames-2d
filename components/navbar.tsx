@@ -1,10 +1,9 @@
 'use client'
+
 import { authClient } from "@/lib/auth-client";
 import { ThemeToggle } from "./toggle-theme";
 import { redirect, usePathname } from "next/navigation";
 import toast from "react-hot-toast";
-import Link from "next/link";
-import { IconLogout } from "@tabler/icons-react";
 
 const signOut = async() => {
     await authClient.signOut()

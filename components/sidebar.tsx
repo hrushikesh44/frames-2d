@@ -1,6 +1,6 @@
 'use client'
-import { auth } from "@/lib/auth";
-import { IconArrowRight, IconHome, IconLayoutSidebar, IconLogout, IconVideo } from "@tabler/icons-react";
+
+import { IconArrowRight, IconHistoryToggle, IconHome, IconLayoutSidebar, IconLogout, IconVideo } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
 
@@ -26,6 +26,7 @@ export default function Sidebar(){
                 <div className="w-full pt-5 ">
                     <Link href={'/'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><IconHome/>Home</span> : <IconHome/>}</Link>
                     <Link href={'/videos'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><IconVideo/>Videos</span> : <IconVideo/>}</Link>
+                    <Link href={'/history'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><IconHistoryToggle/>Videos</span> : <IconHistoryToggle/>}</Link>
                 </div>
                 <div>
                     <Link href={'/login'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><IconLogout/>Logout</span> : <IconLogout/>}</Link>

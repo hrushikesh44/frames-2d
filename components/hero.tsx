@@ -1,19 +1,12 @@
 'use client'
 
-
 import Code from "@/components/code-block";
 import Loading from "@/components/icons/loading";
-import {  IconAccessPointOff, IconArrowUp, IconSun } from "@tabler/icons-react";
+import { IconArrowUp, IconBan } from "@tabler/icons-react";
 import { useCallback, useState } from "react"
 import { toast} from "react-hot-toast";
 import VideoPlayer from "./video";
-
-function cleanCode(raw: string): string {
-  return raw
-    .replace(/^```(?:python)?\s*/i, "")
-    .replace(/```$/, "") 
-    .trim();
-}
+import { cleanCode } from "@/lib/cleancode";
 
 export default function Hero(){
     const [value, setValue] = useState<string>('')
@@ -70,23 +63,16 @@ export default function Hero(){
         const data = await res.json();
         console.log(data)
         
-        if(data.video.url){
+        try{
             setVideoUrl(data.video.url)
-        } else if(data.error === "Failed to render and upload video") {
-            console.log('error while rendering')
-            toast("Error while rendering video")
+            setRendered(true)
+            toast.success("video rendered successfully")
+        } catch(error) {
+            toast.error("error while generating video")
             setVideoLoading(false)
-            return
-        } else if (data.error == "Video not found" ){
-            console.log('Video path not found')
-            toast("video not found")
-            setVideoLoading(false)
-            return
         }
         
-        toast.success("Video has successfully rendered.")
         setVideoLoading(false)
-        setRendered(true)
     }, [videoLoading, rendered])
 
     return (
@@ -103,26 +89,28 @@ export default function Hero(){
                     {videoUrl && <VideoPlayer url={videoUrl}/>}
                 </div>
             </div>
-            <div className={`w-fit transition-all duration-300 ${ response || loading ? " mb-4" : " "}`}>
+            <div className={`w-fit relative transition-all duration-300 ${ response || loading ? " mb-4" : " "}`}>
                 {!response && !loading && <div>
                 <p className="text-3xl font-bold text-center mb-5">Frames 2D</p>
                 </div> }
-                <div className={`flex flex-col items-end shadow-lg border dark:border-neutral-400 h-fit p-2 rounded-2xl focus-within:border-2`}>
-                <textarea
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    className="w-[80vw] 
-                    sm:w-[60vw] lg:w-[40vw] resize-none overflow-hidden outline-none p-2 focus:outline-none transition-transform duration-200 placeholder:text-neutral-700 dark:placeholder:text-neutral-400  "
-                    rows={1}
-                    placeholder="Your idea into a video..."
-                />
-                <div className='p-1 border border-neutral-400 dark:border-neutral-600 h-fit w-fit rounded-full cursor-pointer justify-center'>
-                    {value ? <IconArrowUp onClick={handleSubmit}/> : <IconAccessPointOff className="cursor-not-allowed"/>}
-                </div>
+                <div className={`${!response || !loading ?  " " : " sticky bottom-0"}`}>
+                    <div className={`flex flex-col items-end shadow-lg border dark:border-neutral-400 h-fit p-2 rounded-2xl focus-within:border-2`}>
+                    <textarea
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        className="w-[80vw] 
+                        sm:w-[60vw] lg:w-[40vw] resize-none overflow-hidden outline-none p-2 focus:outline-none transition-transform duration-200 placeholder:text-neutral-700 dark:placeholder:text-neutral-400  "
+                        rows={1}
+                        placeholder="Your idea into a video..."
+                    />
+                    <div className='p-1 border border-neutral-400 dark:border-neutral-600 h-fit w-fit rounded-full cursor-pointer justify-center'>
+                        {value ? <IconArrowUp onClick={handleSubmit}/> : <IconBan className="cursor-not-allowed"/>}
+                    </div>
+                     </div>
+                    <p className="text-sm text-center text-neutral-500 ">This version can not make cubes and 3d animations. Trying to fix this very soon.</p>
                 </div>
             </div>
-            <p className="text-sm text-neutral-500 ">This version can not make cubes and 3d animations. Trying to fix this very soon.</p>
         </div>
     )
 }

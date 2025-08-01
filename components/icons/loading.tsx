@@ -1,4 +1,5 @@
 'use client'
+
 import { easeInOut, motion } from 'motion/react'
 
 export default function Loading(){

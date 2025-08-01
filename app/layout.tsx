@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
-  title: "AI 2D Video Generator",
+  title: "Frames 2D",
   icons: {
     icon: '/favicon-32x32.png'
   }

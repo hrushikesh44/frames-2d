@@ -3,8 +3,8 @@
 
 @layer base{
   :root {
-    --background: #D3D3D3;
-    --foreground: #161A1D;
+    --background: #FFFFFF;
+    --foreground: #000000;
     --border: 220 13% 91%
   }
 

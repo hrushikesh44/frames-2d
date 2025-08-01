@@ -1,33 +1,33 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { videos } from "@/lib/db/schema";
+import { chats } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function GET(req: NextRequest){
-   try{
+    try{
         const session = await auth.api.getSession({
-            headers: req.headers
+            headers: req.headers,
         })
 
         if(!session?.user.id){
             return NextResponse.json(
-                { error: 'Unauthorized, please log in' },
+                { message: "Unauthorised, please log in"},
                 { status: 401 }
-            );
+            )
         }
 
-        const userVideos = await db.select().from(videos).where(eq(videos.userId, session.user.id))
+        const chatHistory = await db.select().from(chats).where(eq(chats.userId, session.user.id))
 
         return NextResponse.json(
-            userVideos,
+            chatHistory,
             { status: 200 }
         )
-   } catch(error){
-    return NextResponse.json(
-        {error: error},
-        {status: 500}
-    )
-   }
+        
+    } catch(error){
+        return NextResponse.json(
+            { message: "Error while getting history" },
+            { status: 500 }
+        )
+    }
 }

@@ -5,11 +5,16 @@ import boto3
 import ast
 from datetime import datetime
 from botocore.exceptions import BotoCoreError, NoCredentialsError
+import time
+from manim import * 
+
+render_start_time = time.time()
 
 input_file = "input.py"
 bucket_name = os.getenv("S3_BUCKET")
 region = os.getenv("AWS_DEFAULT_REGION", "ap-south-1")
 output_dir = "/code/media"  
+config.renderer = 'cairo'
 
 os.environ["MANIM_MEDIA_DIR"] = output_dir  
 os.environ["MANIM_USE_OPENCV"] = "false"
@@ -33,10 +38,13 @@ if not os.path.exists(input_file):
     sys.exit(1)
 
 scene_class = extract_scene_class(input_file)
+print(scene_class)
 
 if not scene_class:
     print("No Scene class found in input.py")
     sys.exit(1)
+print("Running manim with:")
+print(f"  manim -qk {input_file} {scene_class}")
 
 try:
     subprocess.run([
@@ -54,14 +62,16 @@ for root, dirs, files in os.walk(output_dir):
     for file in files:
         if file.endswith(".mp4"):
             full_path = os.path.join(root, file)
-            mp4_files.append((full_path, os.path.getmtime(full_path)))
+            mod_time = os.path.getmtime(full_path)
+            if mod_time >= render_start_time:  
+                mp4_files.append((full_path, mod_time))
 
 if not mp4_files:
-    print("Rendered video not found.")
+    print("No freshly rendered video found.")
     sys.exit(1)
 
-latest_video = sorted(mp4_files, key=lambda x: x[1], reverse=True)[0][0]
-print(f"Found rendered video at {latest_video}")
+latest_video = max(mp4_files, key=lambda x: x[1])[0]
+
 
 try:
     s3 = boto3.client("s3", region_name=region)
