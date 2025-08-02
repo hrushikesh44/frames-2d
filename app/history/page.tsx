@@ -37,7 +37,7 @@ export default function Home(){
                 <p className="text-xl text-start font-bold flex items-center gap-2">Your Recent Search<IconHistoryToggle /></p>
                 {history.map((u: any) => (
                     <div key={u.id} className="w-[50vw] border rounded-xl p-2">
-                        <span onClick={() => handleAccordian(u.id)} className={`flex items-center justify-between ${!selected ? " ": "font-bold"}`}>{u.prompt} <IconPlus size={20}/></span>
+                        <span onClick={() => handleAccordian(u.id)} className={`flex items-center justify-between`}>{u.prompt} <IconPlus size={20}/></span>
                         {selected === u.id ? <pre style={{ whiteSpace: 'pre-wrap' }} className="p-8 rounded-xl">
                             <code>{cleanCode(u.chat)}</code>
                         </pre> : <div></div> }
