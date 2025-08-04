@@ -16,7 +16,7 @@ export default function Signin(){
         <div className="flex flex-col items-center justify-center h-screen">
             <div className="h-fit p-3 border rounded-xl w-[30vw]">
                 <p className="text-xl font-semibold text-center pb-10">Signin to Frames 2D</p>
-                <div className="border dark:border-neutral-700 p-2 rounded-xl flex items-center gap-3 justify-center cursor-pointer text-lg" onClick={handleLoginWithGoogle}>
+                <div className="border p-2 rounded-xl flex items-center gap-3 justify-center cursor-pointer text-lg" onClick={handleLoginWithGoogle}>
                    <Google/> Signin with Google
                 </div>
             </div>
