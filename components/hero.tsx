@@ -80,11 +80,11 @@ export default function Hero(){
             <div className="flex flex-col overflow-hidden">
                     <div className="flex flex-col items-center">
                     <div className="sm:w-[60vw] lg:w-[40vw] flex flex-col pb-10 items-end gap-4">
-                        {chat && <p className="text-xl text-end mt-10 p-2 border border-neutral-400 dark:border-neutral-600 rounded-xl">{chat}</p>}
+                        {chat && <p className="text-xl text-end mt-10 p-2 border shadow-2xl border-neutral-300 rounded-xl">{chat}</p>}
                         {loading && <Loading />}
                     </div>
                     </div>
-                {response && <Code response={response} onClick={() => runCode(response)} loading={videoLoading}/>}
+                {response && !loading && <Code response={response} onClick={() => runCode(response)} loading={videoLoading}/>}
                 <div className="flex flex-col items-center justify-around">
                     {videoUrl && <VideoPlayer url={videoUrl}/>}
                 </div>

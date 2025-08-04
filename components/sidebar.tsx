@@ -9,7 +9,8 @@ export default function Sidebar(){
     const closeSidebar = () => setOpen(false);
     
     return (
-        <div className={`h-screen border-r border-neutral-500 p-2 fixed z-50 backdrop-blur-2xl ${open ? "w-72": "w-20"} truncate `}>
+        <div
+        className={`h-screen border-r border-neutral-500 p-2 fixed z-50 backdrop-blur-2xl ${open ? "w-72": "w-20"} transition-transform duration-300 truncate `}>
             <div className={`flex items-center w-full gap-5 ${open ? "justify-between" : "justify-center"}`}>
                 {open ? <div className="rounded-lg w-fit cursor-pointer">
                     <p className="p-1">Frames 2D</p>

@@ -34,7 +34,8 @@ export async function POST(req: Request) {
 - Dont ever overlap any element on one another either it be a shape or arrow or text.
 - Always fit the entire scene inside the view and do not go outside the viewport.
 - Do not give any comments on the code , just only give code.
-- Always try to explain using shapes and texts.
+- Always try to explain using shapes and very limited usage of texts.
+- Do not allow shapes, arrows and text to overlap on one another.
 - Also always keep the text size inside the element or outside the element and but never allow text to overflow the shapes.
 - The code must be self-contained and ready to render with manim -pql input.py SceneClassName.
 
