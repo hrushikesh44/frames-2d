@@ -33,7 +33,7 @@ export function Footer(){
                 </div>
             </div>
             <div className="flex items-center justify-between w-5xl">
-                <p className=" text-neutral-500 text-sm font-sans">Built by <Link href={'https://x.com/hrushikesh_44'} className="hover:text-neutral-900 font-medium">hrushikesh</Link></p>
+                <p className=" text-neutral-500 text-sm font-sans">Built by <Link href={'https://x.com/hrushikesh_44'} className="hover:text-[#fe7788] font-medium">hrushikesh</Link></p>
                 <Link href={'https://github.com/hrushikesh44'}><IconBrandGithub size={20}/></Link>
             </div>
     </div>
