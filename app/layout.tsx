@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Frames 2D",
@@ -26,6 +27,7 @@ export default function RootLayout({
           <Navbar />
           <Toaster position="bottom-right"/>
           {children}
+          <Footer/>
         </Providers>
         </body>
       </html>

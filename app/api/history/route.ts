@@ -26,7 +26,7 @@ export async function GET(req: NextRequest){
         
     } catch(error){
         return NextResponse.json(
-            { message: "Error while getting history" },
+            { message: "Error while getting history" , error},
             { status: 500 }
         )
     }

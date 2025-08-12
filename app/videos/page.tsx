@@ -6,7 +6,9 @@ import Sidebar from "@/components/sidebar";
 import VideoPlayer from "@/components/video";
 
 export default function Home(){
-    const [videos, setVideos] = React.useState<string[]>();
+    type VideoItem = { id: string; url: string; userId: string };
+
+    const [videos, setVideos] = React.useState<VideoItem[]>([]);
     const [currentPage, setCurrentPage] = React.useState(1);
     const itemsPerPage = 9;
 
@@ -18,7 +20,7 @@ export default function Home(){
                     credentials: "include"
                 })
 
-                const data = await response.json()
+                const data: VideoItem[] = await response.json()
                 setVideos(data.reverse())
             } catch(error) {
                 console.log('error fetching videos', error)
@@ -40,15 +42,15 @@ export default function Home(){
                 <p className="text-gray-500 text-center">Loading...</p>
                 ) : (
                 <>
-                    <div className="flex flex-wrap items-center gap-5 pl-32">
-                        {currentData?.map((video: any) => (
+                    <div className="flex flex-wrap gap-5 pl-32 min-h-screen ">
+                        {currentData?.map((video: VideoItem) => (
                         <div key={video.id} className=" gap-5 ">
                         <VideoPlayer url={video.url} key={video.id}/>
                         </div>
                         ))}
                     </div>
 
-                    {videos && <div className=" fixed bottom-0 left-0 right-0 py-4 flex justify-center items-center gap-2 border-t border-neutral-400/70">
+                    {videos && <div className=" bottom-0 pt-4 w-screen flex justify-center items-center gap-2 border-t border-neutral-400/30">
                         <button
                         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                         disabled={currentPage === 1}

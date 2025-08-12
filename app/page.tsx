@@ -1,15 +1,32 @@
-import Hero from "@/components/hero";
-import Sidebar from "@/components/sidebar";
+import { Bento } from "@/components/landing-bento";
+import { ThemeToggle } from "@/components/toggle-theme";
+import VideoPlayer from "@/components/video";
+import { IconArrowRight, IconBrandGithub, IconBrandX } from "@tabler/icons-react";
+import Link from "next/link";
 
-export default async function Home(){
+export default function Home(){
     return(
-        <div>
-            <div className="flex">
-                <Sidebar />
-                <div className="flex items-center justify-center w-full">
-                     <Hero />
+        <div className="flex flex-col items-center justify-center relative">
+            <section id="main" className="fixed top-0 z-50 backdrop-blur-3xl flex items-center justify-around w-full px-5 py-3 h-16">
+                <Link href={'/'} className="font-bold text-lg tracking-tight">
+                    Frames 2D
+                </Link>
+                <div className="flex items-center gap-4">
+                    <Link href={'https://github.com/hrushikesh44/frames-2d'} target="_blank" className="p-2 hover:bg-neutral-400/30 rounded-full"><IconBrandGithub /></Link>
+                    <Link href={'https://x.com/hrushikesh_44'} target="_blank" className="p-2 hover:bg-neutral-400/30 rounded-full"><IconBrandX /></Link>
+                    <ThemeToggle />
                 </div>
-            </div>
+            </section>
+            <section id="video-section" className="flex flex-col items-center mt-40">
+                <h1 className="text-2xl md:text-4xl font-bold mb-2 tracking-tight">Generate 2D videos</h1>
+                <p className="text-lg font-light mb-6 text-neutral-500 text-center max-w-3xl">Frames 2D is a tool that allows you to generate 2D videos with just a prompt. Videos generated in this application are by using  <a href="https://github.com/3b1b/manim">manim</a> library.</p>
+                <Link href={'/generate'} className="flex group border border-neutral-400/70 px-2 py-1 rounded-md" type="button">Get Started <IconArrowRight className="group-hover:translate-x-1 transition-transform duration-200"/></Link>
+                <p className="mt-10 text-[16px] text-neutral-500 font-light">Generate videos like below just with a prompt.</p>
+                <video controls={false} width={600} height={600} autoPlay muted loop playsInline src="/rabbitdemo.mp4" className="mt-5 rounded-lg border border-neutral-400/30"/>
+            </section>
+            <section id="feature-section" className="mt-20">
+                <Bento/>
+            </section>
         </div>
     )
 }

@@ -70,6 +70,7 @@ export default function Hero(){
         } catch(error) {
             toast.error("error while generating video")
             setVideoLoading(false)
+            return error;
         }
         
         setVideoLoading(false)

@@ -1,6 +1,6 @@
 'use client'
 
-import { IconArrowRight, IconHistoryToggle, IconHome, IconLayoutSidebar, IconLogout, IconVideo } from "@tabler/icons-react";
+import { Icon3dCubeSphere, IconArrowRight, IconHistoryToggle, IconHome, IconLayoutSidebar, IconLogout, IconVideo } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import React from "react";
@@ -22,17 +22,18 @@ export default function Sidebar(){
                 {open ? <div className="rounded-lg w-fit cursor-pointer">
                     <p className="p-1">Frames 2D</p>
                 </div> : 
-                <div className="rounded-lg items-center hover:bg-neutral-400/30  w-fit cursor-pointer" onClick={() => setOpen(true)}>
+                <button className="rounded-lg items-center hover:bg-neutral-400/30  w-fit cursor-pointer" type="button" onClick={() => setOpen(true)}>
                     <IconArrowRight className="m-1"/>
-                </div>
+                </button>
                 }
-                {open && <div className="p-1 rounded-lg hover:bg-neutral-400/30"  onClick={closeSidebar}>
+                {open && <button className="p-1 rounded-lg hover:bg-neutral-400/30" type="button" onClick={closeSidebar}>
                     <IconLayoutSidebar />
-                </div>}
+                </button>}
             </div>
             <div className="flex flex-col h-[90vh] justify-between">
                 <div className="w-full pt-5 ">
                     <Link href={'/'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><IconHome/>Home</span> : <IconHome/>}</Link>
+                    <Link href={'/generate'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><Icon3dCubeSphere/>Generate</span> : <Icon3dCubeSphere/>}</Link>
                     <Link href={'/videos'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><IconVideo/>Videos</span> : <IconVideo/>}</Link>
                     <Link href={'/history'} className={`flex p-1 text-lg font-light rounded-lg hover:scale-105 transition-transform duration-150 gap-3 w-full items-center hover:bg-neutral-400/20 mt-5 ${open ? " " : "justify-center"}`}>{open ? <span className="flex justify-around gap-3"><IconHistoryToggle/>Videos</span> : <IconHistoryToggle/>}</Link>
                 </div>
