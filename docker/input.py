@@ -1,42 +1,83 @@
 from manim import *
 
-class WebSocketVisualization(Scene):
+class NewtonLaws(Scene):
     def construct(self):
-        server = Square(side_length=1.5, color=BLUE, fill_opacity=0.5).shift(LEFT * 3)
-        client = Circle(radius=0.75, color=GREEN, fill_opacity=0.5).shift(RIGHT * 3)
-        
-        server_label = Tex("Server").next_to(server, DOWN)
-        client_label = Tex("Client").next_to(client, DOWN)
-        
-        self.play(Create(server), Create(client), Write(server_label), Write(client_label))
+        law1_text = Text("Newton's First Law", font_size=24)
+        law1_description = Text("An object at rest stays at rest...", font_size=18)
 
-        message_text = Tex("Data").scale(0.7)
-        message = RoundedRectangle(corner_radius=0.2, width=1.0, height=0.5, color=YELLOW, fill_opacity=0.8)
-        message.move_to(server.get_right() + LEFT*0.1 + RIGHT*1.5)
-        
-        arrow = Arrow(server.get_right(), client.get_left(), buff=0.5)
-        message_text.move_to(arrow.get_center())
+        law1_group = VGroup(law1_text, law1_description).arrange(DOWN).shift(UP*2.5)
 
-        self.play(Create(arrow), Create(message), Write(message_text))
-        self.wait(1)
-        self.play(
-            message.animate.move_to(client.get_left() + RIGHT*0.1 + LEFT*1.5),
-            message_text.animate.move_to(client.get_center() + LEFT*0.8)
-        )
-
+        self.play(Write(law1_text))
+        self.play(Write(law1_description))
         self.wait(1)
 
-        arrow_back = Arrow(client.get_left(), server.get_right(), buff=0.5)
-        message_back = RoundedRectangle(corner_radius=0.2, width=1.0, height=0.5, color=YELLOW, fill_opacity=0.8)
-        message_back.move_to(client.get_right() + LEFT*0.1 + RIGHT*1.5)
-        message_text_back = Tex("Ack").scale(0.7)
-        message_text_back.move_to(arrow_back.get_center())
+        ball = Circle(radius=0.5, color=BLUE, fill_opacity=1).shift(LEFT * 3)
+        self.play(Create(ball))
+        self.wait(1)
 
-        self.play(Create(arrow_back), Create(message_back), Write(message_text_back))
+        arrow = Arrow(ball.get_right(), ball.get_right() + RIGHT * 2, color=RED)
+        force_text = Text("Force", font_size=18).next_to(arrow, UP)
+
+        self.play(Create(arrow), Write(force_text))
+        self.play(ball.animate.shift(RIGHT*2))
         self.wait(1)
-        self.play(
-             message_back.animate.move_to(server.get_left() + RIGHT*0.1 + LEFT*1.5),
-            message_text_back.animate.move_to(server.get_center() + RIGHT * 0.8)
-        )
+
+        self.play(FadeOut(ball), FadeOut(arrow), FadeOut(force_text), FadeOut(law1_group))
+
+        law2_text = Text("Newton's Second Law", font_size=24)
+        law2_description = Text("F = ma", font_size=18)
+
+        law2_group = VGroup(law2_text, law2_description).arrange(DOWN).shift(UP*2.5)
+        self.play(Write(law2_text))
+        self.play(Write(law2_description))
+        self.wait(1)
+
+        box = Rectangle(width=1, height=1, color=GREEN, fill_opacity=0.5).shift(LEFT * 3)
+        mass_text = Text("m", font_size=20).move_to(box.get_center())
+        box_group = Group(box, mass_text)
+
+        self.play(Create(box), Write(mass_text))
+        self.wait(0.5)
+        arrow = Arrow(box.get_right(), box.get_right() + RIGHT * 2, color=RED)
+        force_text = Text("F", font_size=20).next_to(arrow, UP)
+
+        self.play(Create(arrow), Write(force_text))
+        self.play(box_group.animate.shift(RIGHT*2))
+        self.wait(1)
+
+        acceleration_arrow = Arrow(box.get_right(), box.get_right() + RIGHT*2, color=YELLOW)
+        acceleration_text = Text("a", font_size=20).next_to(acceleration_arrow, UP)
+        self.play(Create(acceleration_arrow), Write(acceleration_text))
+        self.wait(1)
+
+        self.play(FadeOut(box_group), FadeOut(arrow), FadeOut(force_text), FadeOut(acceleration_arrow), FadeOut(acceleration_text), FadeOut(law2_group))
+
+        law3_text = Text("Newton's Third Law", font_size=24)
+        law3_description = Text("Action and reaction are equal and opposite", font_size=18)
+
+        law3_group = VGroup(law3_text, law3_description).arrange(DOWN).shift(UP*2.5)
+
+        self.play(Write(law3_text))
+        self.play(Write(law3_description))
+        self.wait(1)
+
+        box1 = Square(side_length=1, color=PURPLE, fill_opacity=0.5).shift(LEFT * 2)
+        box2 = Square(side_length=1, color=ORANGE, fill_opacity=0.5).shift(RIGHT * 2)
+
+        arrow1 = Arrow(box1.get_right(), box1.get_right() + RIGHT, color=RED)
+        arrow2 = Arrow(box2.get_left(), box2.get_left() + LEFT, color=BLUE)
+
+        force1_text = Text("Action", font_size=16).next_to(arrow1, UP)
+        force2_text = Text("Reaction", font_size=16).next_to(arrow2, UP)
         
+        self.play(Create(box1), Create(box2))
+        self.wait(0.5)
+
+        self.play(Create(arrow1), Create(arrow2), Write(force1_text), Write(force2_text))
         self.wait(1)
+
+        self.play(FadeOut(box1), FadeOut(box2), FadeOut(arrow1), FadeOut(arrow2), FadeOut(force1_text), FadeOut(force2_text), FadeOut(law3_group))
+
+        end_text = Text("The End", font_size=36)
+        self.play(Write(end_text))
+        self.wait(2)

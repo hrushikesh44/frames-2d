@@ -6,6 +6,11 @@ export default defineConfig({
   schema: 'lib/db/schema.ts',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
+    host: 'localhost',
+    port: 5432,
+    user: process.env.DB_USER || 'hrushi',
+    password: process.env.DB_PASSWORD || 'password123',
+    database: 'frames2d',
+    ssl: false,
   },
 });

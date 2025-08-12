@@ -80,7 +80,8 @@ export const chats = pgTable("chat", {
 })
 
 export const userRelations = relations(user, ({many}) => ({
-  videos: many(videos)
+  videos: many(videos),
+  chats: many(chats)
 }))
 
 export const videoRelations = relations(videos, ({one}) => ({
@@ -97,4 +98,4 @@ export const chatRelations = relations(chats, ({one}) => ({
   })
 }))
 
-export const schema = { user , account, verification, session, videos}
+export const schema = { user , account, verification, session, videos, chats}

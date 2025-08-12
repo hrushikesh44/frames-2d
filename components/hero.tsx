@@ -2,10 +2,10 @@
 
 import Code from "@/components/code-block";
 import Loading from "@/components/icons/loading";
+import VideoPlayer from "./video";
 import { IconArrowUp, IconBan } from "@tabler/icons-react";
 import { useCallback, useState } from "react"
 import { toast} from "react-hot-toast";
-import VideoPlayer from "./video";
 import { cleanCode } from "@/lib/cleancode";
 
 export default function Hero(){

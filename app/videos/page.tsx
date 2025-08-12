@@ -1,9 +1,9 @@
 'use client'
 
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import React from "react";
 import Sidebar from "@/components/sidebar";
 import VideoPlayer from "@/components/video";
-import { IconArrowLeft, IconArrowRight, IconLoader2 } from "@tabler/icons-react";
-import React from "react";
 
 export default function Home(){
     const [videos, setVideos] = React.useState<string[]>();
@@ -21,13 +21,13 @@ export default function Home(){
                 const data = await response.json()
                 setVideos(data.reverse())
             } catch(error) {
-                console.log('error fetching videos')
+                console.log('error fetching videos', error)
             }
         }
         fetchVideos()
     }, [])
 
-    const totalPages = Math.ceil(videos?.length!  / itemsPerPage);
+    const totalPages = Math.ceil((videos?.length || 0)  / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentData = videos?.slice(startIndex, startIndex + itemsPerPage);
     
@@ -48,11 +48,11 @@ export default function Home(){
                         ))}
                     </div>
 
-                    {videos && <div className="mt-4 flex justify-center gap-2 mb-20 ">
+                    {videos && <div className=" fixed bottom-0 left-0 right-0 py-4 flex justify-center items-center gap-2 border-t border-neutral-400/70">
                         <button
                         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                         disabled={currentPage === 1}
-                        className="p-2 border cursor-pointer hover:bg-black hover:text-white rounded-full disabled:opacity-50"
+                        className="p-2 border cursor-pointer hover:bg-black hover:text-white rounded-full disabled:opacity-50" type="button"
                         >
                         <IconArrowLeft />
                         </button>
@@ -62,7 +62,7 @@ export default function Home(){
                         <button
                         onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                         disabled={currentPage === totalPages || totalPages === 0}
-                        className="p-2 border cursor-pointer hover:bg-black hover:text-white rounded-full disabled:opacity-50"
+                        className="p-2 border cursor-pointer hover:bg-black hover:text-white rounded-full disabled:opacity-50" type="button"
                         >
                         <IconArrowRight/>
                         </button>
