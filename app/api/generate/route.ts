@@ -14,8 +14,7 @@ export async function POST(req: Request) {
   })
 
   if(!session?.user.id){
-    toast("You're session is expired")
-    return NextResponse.json({errie: "SESSION EXPIRED"}, {status: 404})
+    return NextResponse.json({error: "SESSION EXPIRED"}, {status: 404})
   }
 
   const { prompt } = await req.json();

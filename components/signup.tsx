@@ -23,7 +23,7 @@ export default function Signin(){
                 <h2 className="font-bold text-xl text-center">Login to Frames 2D</h2>
             </div>
             <div className="flex flex-1 flex-col mt-8 gap-4">
-                <button className="flex items-center justify-center w-full px-2 py-1 rounded-lg shadow-[0_0.5px_1px_rgb(0,0,0,0.2)] border border-neutral-400/40 inset-shadow-2xs hover:bg-neutral-200/50 dark:hover:bg-neutral-900 cursor-pointer gap-3">Login with Google<Google/></button>
+                <button onClick={handleLoginWithGoogle} className="flex items-center justify-center w-full px-2 py-1 rounded-lg shadow-[0_0.5px_1px_rgb(0,0,0,0.2)] border border-neutral-400/40 inset-shadow-2xs cursor-pointer gap-3">Login with Google<Google/></button>
             </div>
         </motion.div>
     )
