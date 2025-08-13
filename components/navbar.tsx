@@ -21,7 +21,7 @@ export default function Navbar(){
    return(
      <div className="flex items-center justify-end ">
         <div className="flex items-center gap-3 pt-10 fixed">
-            {!shouldHideNavbar && <ThemeToggle />}
+            <ThemeToggle />
             {!shouldHideNavbar && <button onClick={signOut} className="flex items-center gap-1 cursor-pointer p-2 rounded-xl group" type="button"><IconLogout className="group-hover:translate-x-0.5 transition-transform duration-300"/></button>}
         </div>
      </div>

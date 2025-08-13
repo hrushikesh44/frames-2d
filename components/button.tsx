@@ -1,5 +1,5 @@
 interface ButtonProps{
-    onClick: () => Promise<string | void>;
+    onClick: () => Promise<unknown>;
     text: string;
 }
 export default function Button({onClick, text}: ButtonProps){

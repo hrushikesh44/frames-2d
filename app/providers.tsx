@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
+import { usePathname } from "next/navigation";
+import { Footer } from "@/components/footer";
 
 export function Providers(props: Readonly<{ children: ReactNode }>) {
   return (
@@ -14,4 +16,11 @@ export function Providers(props: Readonly<{ children: ReactNode }>) {
         {props.children}
       </ThemeProvider>
   );
+}
+
+export function FooterProvider(){
+  const pathname = usePathname();
+  if(pathname === "/login") return null;
+
+  return <Footer/>
 }

@@ -4,7 +4,7 @@ import Button from "./button"
 interface Codeprops{
     response: string,
     loading?: boolean,
-    onClick: () => Promise<string | undefined>
+    onClick: () => Promise<unknown> 
 }
 
 export default function Code({response, loading, onClick} : Codeprops){

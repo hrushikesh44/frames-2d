@@ -1,10 +1,10 @@
 import { IconBrandGithub } from "@tabler/icons-react";
 import Link from "next/link";
 
-
 export function Footer(){
+
     return(
-        <div className="w-screen flex flex-col items-center justify-around border-t border-neutral-400/40 mt-20 p-10">
+       <div className="w-screen flex flex-col items-center justify-around border-t border-neutral-400/40 mt-20 p-10">
             <div className="bottom-0 w-6xl  flex justify-around mb-10">
                 <div className="">
                     <p className="font-bold">Frames 2D</p>
@@ -36,7 +36,7 @@ export function Footer(){
                 <p className=" text-neutral-500 text-sm font-sans">Built by <Link href={'https://x.com/hrushikesh_44'} className="hover:text-[#fe7788] font-medium">hrushikesh</Link></p>
                 <Link href={'https://github.com/hrushikesh44'}><IconBrandGithub size={20}/></Link>
             </div>
-    </div>
+        </div>
     )
 }
 
