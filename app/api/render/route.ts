@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   const runDocker = () =>
   new Promise<string>((resolve, reject) => {
     exec(
-      `docker run --rm --env-file .env -v ${dockerDir}:/code manim-exec:new`,
+      `docker run --rm --env-file .env -v ${dockerDir}:/code hrushikesh/manim-exec:new`,
       (error, stdout, stderr) => {
         if (error) {
           console.error("Docker error:", stderr);

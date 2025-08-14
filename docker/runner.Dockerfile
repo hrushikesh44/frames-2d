@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libopenblas-dev \
     liblapack-dev \
     libopengl0 \
-    libgl1-mesa-glx \
+    libgl1 \
     libgl1-mesa-dri \
     libglu1-mesa \
     libglew-dev \
