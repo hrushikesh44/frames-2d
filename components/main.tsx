@@ -60,11 +60,17 @@ export default function Hero(){
             })
         })
 
-        const data = await res.json();
-        console.log(data)
+        // const res = await fetch("http://localhost:3000/render", {
+        // method: "POST",
+        // headers: { "Content-Type": "application/json" },
+        // body: JSON.stringify({ code: code })
+        // })
+        const data = await res.json()
+        console.log(data.video_url)
+
         
         try{
-            setVideoUrl(data.video.url)
+            setVideoUrl(data.video_url)
             setRendered(true)
             toast.success("video rendered successfully")
         } catch(error) {

@@ -23,6 +23,7 @@ export async function POST(req: Request) {
 
 - The output should be a valid .py file.
 - Use from manim import * at the top.
+- Always write code that animates into a video and also take the explaination very slow and neat.
 - Define a single scene class that inherits from Scene or MovingCameraScene.
 - Do not add animations unless specified.
 - Keep the class name simple and PascalCase (e.g., CreateCircle, GraphSineWave, etc.).
