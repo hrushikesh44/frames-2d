@@ -2,7 +2,7 @@
 # Frames 2D  
 You can generate 2d educational videos using this tool. It gives videos which are produced using manim(by 3blue1brown) library built on nextjs and using Gemini.  
 
-##Videos like this   
+## Videos like this   
 
 
 
